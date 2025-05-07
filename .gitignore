@@ -1,0 +1,5 @@
+.venv
+.env
+.python-version
+__pycache__
+*.session
