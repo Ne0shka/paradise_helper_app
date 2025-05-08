@@ -1,7 +1,6 @@
 services:
   bot:
-    #image: ghcr.io/Ne0shka/paradise-helper-app:latest
-    build: .
+    image: ghcr.io/Ne0shka/paradise-helper-app:latest
     container_name: bot
     restart: always
     environment:
