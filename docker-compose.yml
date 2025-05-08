@@ -5,6 +5,7 @@ services:
     container_name: bot
     restart: always
     environment:
+      PYTHONUNBUFFERED: "1"
       API_ID: ""
       API_HASH: ""
       BOT_TOKEN: ""
