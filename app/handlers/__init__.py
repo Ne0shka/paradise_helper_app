@@ -3,6 +3,8 @@ import os
 import asyncio
 import importlib
 
+from loguru import logger
+
 
 async def init(bot):
     handlers = [
@@ -22,11 +24,11 @@ async def _init_handler(handler, bot):
         return
     try:
         hname = handler.__name__.split(".")[-1]
-        print("Загрузка модуля", hname, "...")
+        logger.info("Загрузка модуля " + hname + "...")
         h_init = await handler.init(bot)
-        print("Модуль", hname, "успешно загружен!")
+        logger.info("Модуль " + hname + " успешно загружен!")
     except Exception:
-        print("Ошибка загрузки модуля", handler)
+        logger.exception("Ошибка загрузки модуля " + handler)
     else:
         if asyncio.iscoroutine(h_init):
             await h_init
