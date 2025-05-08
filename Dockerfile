@@ -5,10 +5,10 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
-COPY requirements/prod.txt .
+COPY requirements.txt .
 RUN pip install --no-cache-dir -U setuptools && \
-    pip install --no-cache-dir -r prod.txt && \
-    rm -f prod.txt
+    pip install --no-cache-dir -r requirements.txt && \
+    rm -f requirements.txt
 
 COPY app/ app/
 
