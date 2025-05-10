@@ -1,24 +1,22 @@
-import os
-
 from loguru import logger
-from dotenv import load_dotenv
 from telethon import TelegramClient
 
 from app import handlers
 from app.utils import setup_logger
+from app.utils.config import load_config
 
 
 async def app_run():
     setup_logger.setup()
     logger.info("Инициализация бота...")
-    load_dotenv()
+    config = load_config()
     bot = TelegramClient(
         "bot",
-        api_id=int(os.getenv("API_ID")),
-        api_hash=os.getenv("API_HASH"),
+        api_id=int(config.get("API_ID", 0)),
+        api_hash=config.get("API_HASH"),
     )
     try:
-        await bot.start(bot_token=os.getenv("BOT_TOKEN"))
+        await bot.start(bot_token=config.get("BOT_TOKEN"))
         await handlers.init(bot)
         logger.info("Бот в сети!")
         await bot.run_until_disconnected()
