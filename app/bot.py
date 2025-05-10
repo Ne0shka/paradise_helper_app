@@ -2,12 +2,11 @@ from loguru import logger
 from telethon import TelegramClient
 
 from app import handlers
-from app.utils import setup_logger
-from app.utils.config import load_config
+from app.utils import setup_logger, load_config
 
 
 async def app_run():
-    setup_logger.setup()
+    setup_logger()
     logger.info("Инициализация бота...")
     config = load_config()
     bot = TelegramClient(

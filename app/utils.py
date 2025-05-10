@@ -1,10 +1,19 @@
+import os
 import sys
 import logging
 
 from loguru import logger
+from dotenv import dotenv_values
 
 
-def setup():
+def load_config():
+    return {
+        **dotenv_values(".env"),
+        **os.environ,
+    }
+
+
+def setup_logger():
     logger_format = (
         "<green>{time:DD-MM-YYYY HH:mm:ss}</green> | "
         "<level>{level: <8}</level> | "

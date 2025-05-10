@@ -1,7 +1,7 @@
 from telethon import events
 
-from app.utils.emotes_gif import get_gif
-from app.utils.mention_getter import get_mentioned_user
+from app.services.emotes_gif import get_gif
+from app.services.mention_getter import get_mentioned_user
 
 
 async def init(bot):
