@@ -10,8 +10,13 @@ async def init(bot):
     @bot.on(events.NewMessage(pattern="!? ?[оО][бБ][нН][яЯ][тТ][ьЬ]"))
     async def handler(event):
         if event.is_group:
+            sender = f"<a href=\"tg://user?id={event.sender.id}\">{event.sender.first_name}</a>"
             mention = await get_mentioned_user(event.message, event.client)
             if mention is not None:
-                sender = f"<a href=\"tg://user?id={event.sender.id}\">{event.sender.first_name}</a>"
                 receiver = f"<a href=\"tg://user?id={mention.id}\">{mention.first_name}</a>"
-                await event.reply(f"{sender} обнимает {receiver}", file=await get_gif("hug"), parse_mode="html")
+            elif event.is_reply:
+                reply_user = (await event.get_reply_message()).sender
+                receiver = f"<a href=\"tg://user?id={reply_user.id}\">{reply_user.first_name}</a>"
+            else:
+                return
+            await event.reply(f"{sender} обнимает {receiver}", file=await get_gif("hug"), parse_mode="html")
