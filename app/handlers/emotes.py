@@ -9,7 +9,7 @@ async def init(bot):
     @bot.on(events.NewMessage(pattern="!? ?[оО][бБ][нН][яЯ][лЛ]"))
     @bot.on(events.NewMessage(pattern="!? ?[оО][бБ][нН][яЯ][тТ][ьЬ]"))
     async def handler(event):
-        if event.is_group and event.mentioned:
+        if event.is_group:
             mention = await get_mentioned_user(event.message, event.client)
             sender = f"<a href=\"tg://user?id={event.sender.id}\">{event.sender.first_name}</a>"
             receiver = f"<a href=\"tg://user?id={mention.id}\">{mention.first_name}</a>"
