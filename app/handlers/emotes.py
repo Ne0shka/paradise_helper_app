@@ -36,4 +36,4 @@ async def init(bot):
         if event.is_group:
             sender, receiver = await emotes_helper.get_targets(event)
             if sender and receiver:
-                await event.reply(f"{sender} кусает {receiver}", file=await emotes_helper.get_gif("bite"), parse_mode="html")
+                await event.reply(f"{sender} кусает {receiver}", file=await emotes_helper.get_gif("lick"), parse_mode="html")
