@@ -1,16 +1,16 @@
 from aiohttp import ClientSession
 
-from app.services.mention_getter import get_mentioned_user, get_mention_link
+from app.services import mention_getter
 
 
 async def get_targets(event):
-    sender = await get_mention_link(event.sender)
-    mention = await get_mentioned_user(event)
+    sender = await mention_getter.get_mention_link(event.sender)
+    mention = await mention_getter.get_mentioned_user(event)
     if mention is not None:
-        receiver = await get_mention_link(mention)
+        receiver = await mention_getter.get_mention_link(mention)
         return sender, receiver
     elif event.is_reply:
-        receiver = await get_mention_link((await event.get_reply_message()).sender)
+        receiver = await mention_getter.get_mention_link((await event.get_reply_message()).sender)
         return sender, receiver
     else:
         return None, None
