@@ -31,9 +31,10 @@ async def init(bot):
                 await event.reply(f"{sender} кусает {receiver}", file=await emotes_helper.get_gif("bite"), parse_mode="html")
 
     @bot.on(events.NewMessage(pattern="(?i)!? ?lick"))
-    @bot.on(events.NewMessage(pattern="!? ?[лЛ][иИ][зЗ]([ьЬ]|[нН][уУ]([лЛ]|[тТ][ьЬ]))"))
+    @bot.on(events.NewMessage(pattern="!? ?[лЛ][иИ][зЗ][ьЬ]"))
+    @bot.on(events.NewMessage(pattern="!? ?([оО][бБ])?[лЛ][иИ][зЗ][нН][уУ]([лЛ]|[тТ][ьЬ])"))
     async def handler(event):
         if event.is_group:
             sender, receiver = await emotes_helper.get_targets(event)
             if sender and receiver:
-                await event.reply(f"{sender} кусает {receiver}", file=await emotes_helper.get_gif("lick"), parse_mode="html")
+                await event.reply(f"{sender} лижет {receiver}", file=await emotes_helper.get_gif("lick"), parse_mode="html")
