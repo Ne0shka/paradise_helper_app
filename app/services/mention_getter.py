@@ -1,12 +1,16 @@
 from telethon.tl.types import MessageEntityMention, MessageEntityMentionName
 
 
-async def get_mentioned_user(msg, cl):
-    if msg.entities is not None:
-        for e in msg.entities:
+async def get_mention_link(user):
+    return f"<a href=\"tg://user?id={user.id}\">{user.first_name}</a>"
+
+
+async def get_mentioned_user(event):
+    if event.message.entities is not None:
+        for e in event.message.entities:
             if type(e) == MessageEntityMention:
-                username = msg.message[e.offset:e.offset+e.length]
-                return await cl.get_entity(username)
+                username = event.message.message[e.offset:e.offset+e.length]
+                return await event.client.get_entity(username)
             if type(e) == MessageEntityMentionName:
-                return await cl.get_entity(e.user_id)
+                return await event.client.get_entity(e.user_id)
     return
